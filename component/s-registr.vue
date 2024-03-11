@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 
 import SInput from "~/component/s-input.vue";
+import SSelect from "~/component/s-select.vue";
 
 const form = ref({
-  name: '',
+  username: '',
   email: '',
   password: '',
   password_repeat: '',
@@ -11,6 +12,13 @@ const form = ref({
   role: null
 
 })
+
+const roles = [
+  {value: 0, name: 'Должность 1'},
+  {value: 3, name: 'Должность 3'},
+  {value: 5, name: 'Должность 6'},
+  {value: 10, name: 'Должность 8'}
+]
 </script>
 
 <template>
@@ -21,8 +29,9 @@ const form = ref({
     <div class="inner">
       <div class="text">Заполните Ваши данные</div>
       <div class="inputs">
-        <s-input v-model.trim="form.name" placeholder='Имя'/>
+        <s-input v-model.trim="form.username" placeholder='Имя'/>
         <s-input v-model.trim="form.email" email placeholder='Email'/>
+        <s-select v-model="form.role" :data="roles" placeholder="Должность" required/>
         <s-input v-model.trim="form.password" password placeholder='Пароль'/>
         <s-input v-model.trim="form.password_repeat" password placeholder='Повторите пароль'/>
       </div>

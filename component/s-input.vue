@@ -22,7 +22,6 @@ const error = ref({status: false, text: ''})
 const regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
 function validateInput(event) {
-  console.log(event)
   if (event.target.value == '') {
     error.value.status = true
     error.value.text = 'Заполните поле'
@@ -32,7 +31,6 @@ function validateInput(event) {
     error.value.status = true
     error.value.text = 'Введите корректный email'
   }
-  emit('update:modelValue', event.target.value)
 }
 
 
