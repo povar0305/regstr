@@ -19,6 +19,8 @@ const roles = [
   {value: 5, name: 'Должность 6'},
   {value: 10, name: 'Должность 8'}
 ]
+
+const checkRole = ref(false)
 </script>
 
 <template>
@@ -31,7 +33,7 @@ const roles = [
       <div class="inputs">
         <s-input v-model.trim="form.username" placeholder='Имя'/>
         <s-input v-model.trim="form.email" email placeholder='Email'/>
-        <s-select v-model="form.role" :data="roles" placeholder="Должность" required/>
+        <s-select v-model="form.role" :data="roles" :error="checkRole" placeholder="Должность"/>
         <s-input v-model.trim="form.password" password placeholder='Пароль'/>
         <s-input v-model.trim="form.password_repeat" password placeholder='Повторите пароль'/>
       </div>

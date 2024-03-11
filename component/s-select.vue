@@ -16,7 +16,6 @@ const emit = defineEmits<{
 
 <template>
   <div :class="{error:error}" class="wrapper">
-    {{ error }}
     <select :value="modelValue" class="s-select"
             @change="$emit('update:modelValue',$event.target.value)"
     >
@@ -28,7 +27,7 @@ const emit = defineEmits<{
         {{ variant.name }}
       </option>
     </select>
-    <span>Выберите значение</span>
+    <span v-show="error">Выберите значение</span>
   </div>
 
 </template>
