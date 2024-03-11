@@ -73,3 +73,4 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+https://www.figma.com/file/RzfLe0cwuP26lGIy3bBgdz/MamodTestFrontend?type=design&node-id=0-1&mode=design&t=u6NIJqORSWBytHzS-0
