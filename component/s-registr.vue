@@ -22,9 +22,9 @@ const form = ref({
       <div class="text">Заполните Ваши данные</div>
       <div class="inputs">
         <s-input v-model.trim="form.name" placeholder='Имя'/>
+        <s-input v-model.trim="form.email" email placeholder='Email'/>
         <s-input v-model.trim="form.password" password placeholder='Пароль'/>
         <s-input v-model.trim="form.password_repeat" password placeholder='Повторите пароль'/>
-        <s-input v-model.trim="form.email" email placeholder='Email'/>
       </div>
     </div>
 
@@ -67,5 +67,14 @@ const form = ref({
 
     }
   }
+
+  .inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 14px;
+    row-gap: 31px;
+  }
 }
+
+
 </style>
