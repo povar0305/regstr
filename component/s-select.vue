@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 const props = defineProps<{
-  modelValue: number
+  modelValue: string
   data: [{ value: number, name: string }]
   placeholder: string
   error: boolean

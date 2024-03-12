@@ -10,7 +10,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "-": "0.0.1",
     "nuxt": "^3.10.3",
+    "sass": "^1.71.1",
     "sass-loader": "^14.1.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
