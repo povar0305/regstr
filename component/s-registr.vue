@@ -26,20 +26,30 @@ const roles = [
 
 const checkRole = ref(false);
 const policy = ref(true)
-
+const anyPassword = computed(() => {
+  return form.value.password != form.value.password_repeat
+})
 const validePolice = ref(true)
 
 function registr() {
   validePolice.value = policy.value
-  console.log('registr')
 
+  if (policy.value && checkRole && form.value.username && form.value.password_repeat == form.value.password && form.value.password_repeat.length > 0 && form.value.email) {
+    emit('send', form.value)
+    console.log('registr')
+    
+  }
 }
+
+const emit = defineEmits<{
+  (e: 'send', form: any): void
+}>()
 </script>
 
 <template>
   <div class="form">
     <div class="title">
-      Регистрация
+      Регистрация {{ policy }}{{ checkRole }} {{ anyPassword }}
     </div>
     <div class="inner">
       <div class="text">Заполните Ваши данные</div>
@@ -47,8 +57,12 @@ function registr() {
         <s-input v-model.trim="form.username" placeholder='Имя'/>
         <s-input v-model.trim="form.email" email placeholder='Email'/>
         <s-select v-model="form.role" :data="roles" :error="checkRole" placeholder="Должность"/>
-        <s-input v-model.trim="form.password" password placeholder='Пароль'/>
-        <s-input v-model.trim="form.password_repeat" password placeholder='Повторите пароль'/>
+        <s-input v-model.trim="form.password" :error="form.password!=form.password_repeat"
+                 errorText="Введите одинаковые пароли" password
+                 placeholder='Пароль'/>
+        <s-input v-model.trim="form.password_repeat" :error="form.password!=form.password_repeat"
+                 errorText="Введите одинаковые пароли" password
+                 placeholder='Повторите пароль'/>
       </div>
     </div>
     <div class="footer">
@@ -80,6 +94,14 @@ function registr() {
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.col {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Montserrat;
+  font-size: 14px;
+}
 
 .form {
   background: white;

@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   modelValue: string
   data: [{ value: number, name: string }]
   placeholder: string
   error: boolean
-}>()
+  textError?: string
+}>(), {
+  textError: ''
+})
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: number): void
@@ -19,7 +22,6 @@ const emit = defineEmits<{
     <select :value="modelValue" class="s-select"
             @change="$emit('update:modelValue',$event.target.value)"
     >
-
       <option disabled selected>{{ placeholder }}</option>
       <option v-for="variant in data" :selected="modelValue?placeholder: modelValue==variant.value"
               :value="variant.value"
@@ -27,7 +29,7 @@ const emit = defineEmits<{
         {{ variant.name }}
       </option>
     </select>
-    <span v-show="error">Выберите значение</span>
+    <span v-show="error">{{ textError }}</span>
   </div>
 
 </template>

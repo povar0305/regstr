@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <s-registr/>
+    <s-registr v-show="!sendForm" @send="send"/>
+    <div v-show="sendForm" class="success">Ваши данные успешно отправлены</div>
   </div>
 </template>
 
@@ -18,4 +19,10 @@ body {
 </style>
 <script lang="ts" setup>
 import SRegistr from "~/component/s-registr.vue";
+
+const sendForm = ref(false)
+
+function send(form) {
+  console.log(form)
+}
 </script>

@@ -8,9 +8,12 @@ const props = withDefaults(defineProps<{
   password?: boolean
   placeholder?: string
   email?: boolean
+  errorText?: string
+  error?: boolean
 }>(), {
   password: false,
-  email: false
+  email: false,
+  error: false
 })
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
@@ -18,19 +21,25 @@ const emit = defineEmits<{
 
 
 const showPassword = ref(true)
-const error = ref({status: false, text: ''})
+const errorInner = ref({status: false, text: ''})
 const regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
 function validateInput(event) {
+
   if (event.target.value == '') {
-    error.value.status = true
-    error.value.text = 'Заполните поле'
+    errorInner.value.status = true
+    errorInner.value.text = 'Заполните поле'
   }
 
   if (props.email && !regex.test(event.target.value)) {
-    error.value.status = true
-    error.value.text = 'Введите корректный email'
+    errorInner.value.status = true
+    errorInner.value.text = 'Введите корректный email'
   }
+
+  if (props.error) {
+    errorInner.value.text = props.errorText;
+  }
+
 }
 
 
@@ -38,14 +47,18 @@ function validateInput(event) {
 
 <template>
   <div class="wrapper">
-    <input :class="{error:error.status}"
+    <input :class="{error:errorInner.status||error}"
            :placeholder="placeholder" :type="password&&showPassword?'password':'text'" :value="modelValue"
-           @blur="validateInput" @focus="error.status=false" @input="$emit('update:modelValue', $event.target.value)">
+           @blur="validateInput" @focus="errorInner.status=false"
+           @input="$emit('update:modelValue', $event.target.value)">
 
     <icon-showed v-show="password&&!showPassword" class="icon" @click="showPassword=!showPassword"/>
     <icon-hided v-show="password&&showPassword" class="icon" @click="showPassword=!showPassword"/>
-    <span v-show="error.status" class="error-text">
-    {{ error.text }}
+    <span v-show="errorInner.status ||error&&!errorText" class="error-text">
+    {{ errorInner.text }}
+    </span>
+    <span v-show="errorInner.status || errorText" class="error-text">
+    {{ errorText }}
     </span>
   </div>
 
