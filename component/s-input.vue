@@ -54,10 +54,10 @@ function validateInput(event) {
 
     <icon-showed v-show="password&&!showPassword" class="icon" @click="showPassword=!showPassword"/>
     <icon-hided v-show="password&&showPassword" class="icon" @click="showPassword=!showPassword"/>
-    <span v-show="errorInner.status ||error&&!errorText" class="error-text">
+    <span v-show="(errorInner.status ||error)&&!errorText" class="error-text">
     {{ errorInner.text }}
     </span>
-    <span v-show="errorInner.status || errorText" class="error-text">
+    <span v-show="(errorInner.status || error)&&!errorText" class="error-text">
     {{ errorText }}
     </span>
   </div>

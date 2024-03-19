@@ -37,7 +37,7 @@ function registr() {
   if (policy.value && checkRole && form.value.username && form.value.password_repeat == form.value.password && form.value.password_repeat.length > 0 && form.value.email) {
     emit('send', form.value)
     console.log('registr')
-    
+
   }
 }
 
@@ -49,7 +49,7 @@ const emit = defineEmits<{
 <template>
   <div class="form">
     <div class="title">
-      Регистрация {{ policy }}{{ checkRole }} {{ anyPassword }}
+      Регистрация
     </div>
     <div class="inner">
       <div class="text">Заполните Ваши данные</div>
@@ -60,6 +60,7 @@ const emit = defineEmits<{
         <s-input v-model.trim="form.password" :error="form.password!=form.password_repeat"
                  errorText="Введите одинаковые пароли" password
                  placeholder='Пароль'/>
+        
         <s-input v-model.trim="form.password_repeat" :error="form.password!=form.password_repeat"
                  errorText="Введите одинаковые пароли" password
                  placeholder='Повторите пароль'/>
